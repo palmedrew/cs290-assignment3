@@ -10,7 +10,7 @@
 
 function returnObjectLiteral() {
   //your code here
-  return { 'type': 'Goldfish', 'brand': 'Pepperidge Farm', 'flavor': 'Cheddar', 'count': 2000}; //Modify ONLY this line
+   return anon = {'type': 'Goldfish', 'brand': 'Pepperidge Farm', 'flavor': 'Cheddar', 'count': 2000}; //Modify ONLY this line
   //end your code
 }
 
@@ -44,28 +44,33 @@ function MessageLog(user) {
     this.recvdMessages = new Array(5);
     this.numSent = 0;
     this.numReceived = 0;
+
+    this.logMessage = function(messageText, direction) {
+        if (direction == 0) {
+            this.sentMessages.unshift(messageText);
+	    this.sentMessages.pop();
+	    this.numSent++;
+        } else if (direction == 1) {
+	    this.recvdMessages.unshift(messageText);
+	    this.recvdMessages.pop();
+	    this.numReceived++;
+        }
+    };
+
+    this.getSentMessage = function(n) {
+        if (n > -1 && n < 5) return this.sentMessages[n];
+        return null;
+    };
+
+    this.totalSent = function() {
+        return this.numSent;
+    };
+
+    this.totalReceived = function() {
+        return this.numReceived;
+    };
+
 }
-MessageLog.prototype.logMessage = function(messageText, direction) {
-    if (direction == 0) {
-        if (this.numSent > 4) this.sentMessages.pop();
-	this.sentMessages.shift(messageText);
-	this.numSent++;
-    } else if (direction == 1) {
-	if (this.numReceived > 4) this.recvdMessages.pop();
-	this.recvdMessages.shift(messageText);
-	this.numReceived++;
-    }
-};
-MessageLog.prototype.getSentMessage = function(n) {
-    if (n > -1 && n < 5) return this.sentMessages[n];
-    return null;
-};
-MessageLog.prototype.totalSent = function() {
-    return this.numSent;
-};
-MessageLog.prototype.totalReceived = function() {
-    return this.numReceived;
-};
 //end your code
 
 /**
@@ -74,8 +79,8 @@ MessageLog.prototype.totalReceived = function() {
 * received.
 */
 //your code here
-MessageLog.prototype.lastRecievedMessage = function() {
-    if (this.numReceived > 0) { return this.recvd.Messages[0];
+MessageLog.prototype.lastReceivedMessage = function() {
+    if (this.numReceived > 0)  return this.recvdMessages[0];
     return null;
 };
 //end your code
