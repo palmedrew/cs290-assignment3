@@ -46,7 +46,7 @@ return true if c is null, false otherwise
 */
 function isNull(c) {
   //your code here
-  if (typeof c == null) return true;
+  if (c === null) return true;
 
   return false;
   //end your code
