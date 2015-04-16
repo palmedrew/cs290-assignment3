@@ -90,8 +90,8 @@ function parseGit(logArray) {
     var myRE = /(^\d+)\s(.*)\s\"(.*)\"$/;
 
     for (var i=0; i < logArray.length; i++) {
-       var match = myRE.exec(logArray[i]); 
-       GitLogs[i] = new GitLog(match[1], match[2], match[3]);
+       match = myRE.exec(logArray[i]); 
+       GitLogs[i] = new GitLog(match[1], new Date(match[2]), match[3]);
     }
 
     return GitLogs;
