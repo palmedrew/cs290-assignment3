@@ -13,7 +13,9 @@
 */
 
 //your code here
-
+function uselessFunction() {
+    return null;
+}
 //end your code
 
 var bar = 'not a function';
@@ -30,7 +32,22 @@ var barType = typeof bar;
 */
 
 //your code here
+//
+//ref for checking if var is an array
+//http://stackoverflow.com/questions/767486/how-do-you-check-if-a-variable-is-an-array-in-javascript
+bar = function(doubleArray) {
+    if (doubleArray.constructor !== Array) return false;
 
+    for (var i=0; i < doubleArray.length; i++) {
+        if (typeof doubleArray[i] == "number") {
+            doubleArray[i] = 2*doubleArray[i];
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+}
 //end your code
 
 /**
@@ -66,5 +83,17 @@ function GitLog(hash, date, message) {
 */
 
 //your code here
+function parseGit(logArray) {
+    var match;
 
+    var GitLogs = new Array(logArray.length);
+    var myRE = /(^\d+)\s(.*)\s\"(.*)\"$/;
+
+    for (var i=0; i < logArray.length; i++) {
+       var match = myRE.exec(logArray[i]); 
+       GitLogs[i] = new GitLog(match[1], match[2], match[3]);
+    }
+
+    return GitLogs;
+}
 //end your code
